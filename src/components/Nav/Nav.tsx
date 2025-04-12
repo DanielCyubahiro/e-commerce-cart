@@ -26,7 +26,7 @@ export const StyledNavigationMenuLink = styled(NavigationMenuLink)`
 `;
 
 const Nav = () => {
-  const [activeNavItem, setActiveNavItem] = useState<string>('woman');
+  const [activeNavItem, setActiveNavItem] = useState<string>('home');
 
   const navItems = [
     {id: 'home', label: 'Home'},
