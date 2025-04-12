@@ -32,7 +32,8 @@ const Nav = () => {
     {id: 'home', label: 'Home'},
     {id: 'man', label: 'Man'},
     {id: 'woman', label: 'Woman'},
-    {id: 'kids', label: 'Kids'},
+    {id: 'jewelery', label: 'Jewelery'},
+    {id: 'electronics', label: 'Electronics'},
   ];
   return (
       <NavigationMenu>
