@@ -24,5 +24,41 @@ export const useStore = create<StoreState>()(
             }
           },
 
-          // Cart Slice TODO
+          // Cart Slice
+          cartItems: [],
+          addItemToCart: (product: Product) => {
+            //Check if there's this item in the cart already
+            const item = get().cartItems.find(item => item.id === product.id);
+            if (item) {
+              set({
+                cartItems: get().cartItems.map(i => i.id === item.id
+                    ? {...i, quantity: i.quantity + 1}
+                    : i,
+                ),
+              });
+            } else {
+              set({cartItems: [...get().cartItems, {...product, quantity: 1}]});
+            }
+          },
+          removeItemFromCart: (productId) => {
+            set({
+              cartItems: get().cartItems.filter(item => item.id !== productId),
+            });
+          },
+          updateCartItemQuantity: (productId, quantity) => {
+            set({
+              cartItems: get().cartItems.map(item => item.id === productId ? {
+                ...item,
+                quantity: quantity,
+              } : item),
+            });
+          },
+          clearCart: () => {
+            set({cartItems: []});
+          },
+          get totalPrice() {
+            return new Intl.NumberFormat('en-US',
+                {style: 'currency', currency: 'EUR'}).format(
+                get().cartItems.reduce((sum, item) => sum + item.price, 0));
+          },
         }));
