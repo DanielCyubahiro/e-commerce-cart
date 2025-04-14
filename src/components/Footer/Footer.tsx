@@ -8,10 +8,7 @@ export const StyledFooter = styled.footer`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: sticky;
     padding: 0.8rem;
     z-index: 1000;
 `;
