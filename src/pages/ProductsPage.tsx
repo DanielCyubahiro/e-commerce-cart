@@ -5,10 +5,9 @@ import Product from '@/components/Product/Product.tsx';
 
 export const StyledContentContainer = styled.div`
     padding: 2rem;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    aspect-ratio: 1/1;
-    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
 `;
 const ProductsPage = () => {
   const products = useStore(state => state.products);
