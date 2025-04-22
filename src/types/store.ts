@@ -21,9 +21,8 @@ export interface CartState {
   'cartItems': CartItem[],
   'addItemToCart': (product: Product) => void,
   'removeItemFromCart': (productId: number) => void,
-  'updateCartItemQuantity': (productId: number, quantity: number) => void,
+  // 'updateCartItemQuantity': (productId: number, quantity: number) => void,
   'clearCart': () => void,
-  'totalPrice': string
 }
 
 export interface ProductsState {
@@ -33,4 +32,9 @@ export interface ProductsState {
   'error': string | null
 }
 
-export type StoreState = CartState & ProductsState;
+export interface View {
+  'cartView': boolean,
+  'setCartView': (value:boolean) => void,
+}
+
+export type StoreState = CartState & ProductsState & View;

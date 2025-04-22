@@ -1,15 +1,8 @@
 import {Card} from '@/components/ui/card.tsx';
 import styled from 'styled-components';
 import {Button} from '@/components/ui/button.tsx';
-import { Heart } from 'lucide-react';
-
-interface StyledCardProps {
-  $background?: string;
-}
-
-interface Product {
-
-}
+import {Heart} from 'lucide-react';
+import {useStore} from '@/store/store.ts';
 
 export const StyledCard = styled(Card)`
     background-image: url(${(props) => props.$background});
@@ -26,6 +19,11 @@ export const StyledCard = styled(Card)`
     font-optical-sizing: auto;
     font-style: normal;
     gap: 0;
+    transition: transform 0.3s ease;
+    &:hover {
+        border-color: black;
+        transform: translateY(-5px);
+    }
 `;
 
 export const StyledInnerCard = styled(Card)`
@@ -68,15 +66,15 @@ export const StyledLighterShade = styled.span`
     color: gray;
 `;
 
-
 export const StyledCartButton = styled(Button)`
     padding: 0.5rem;
     margin-bottom: 0.5rem;
     width: 230px;
+
     &:hover {
         cursor: pointer;
     }
-`
+`;
 
 export const StyledFavorite = styled(Heart)`
     background-color: lightgray;
@@ -86,11 +84,15 @@ export const StyledFavorite = styled(Heart)`
     position: relative;
     bottom: 220px;
     left: 100px;
-`
+`;
 const Product = ({product}) => {
+  const addItemToCart = useStore(state => state.addItemToCart);
+  const handleAddItemToCart = () => {
+    addItemToCart(product);
+  };
   return (
       <StyledCard $background={product.image}>
-        <StyledFavorite />
+        <StyledFavorite/>
         <StyledInnerCard>
           <StyledItemTitle>{product.title}</StyledItemTitle>
           <StyledItemReviewSection>
@@ -99,14 +101,15 @@ const Product = ({product}) => {
                  alt="star--v1"/>
             {product.rating.rate}
             <StyledLighterShade>({product.rating.count} reviews)</StyledLighterShade>
-
           </StyledItemReviewSection>
           <StyledItemPrice>
             {'€' + product.price}
-            <StyledLighterShadePrice>{'€' + Math.round(product.price+80)}</StyledLighterShadePrice>
+            <StyledLighterShadePrice>{'€' +
+                Math.round(product.price + 80)}</StyledLighterShadePrice>
           </StyledItemPrice>
         </StyledInnerCard>
-        <StyledCartButton>Add to Cart</StyledCartButton>
+        <StyledCartButton onClick={handleAddItemToCart}>Add to
+          Cart</StyledCartButton>
       </StyledCard>
   );
 };

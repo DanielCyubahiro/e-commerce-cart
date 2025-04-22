@@ -11,8 +11,6 @@ export const StyledContentContainer = styled.div`
 `;
 const ProductsPage = () => {
   const products = useStore(state => state.products);
-  const isLoading = useStore(state => state.isLoading);
-  const error = useStore(state => state.error);
   const fetchProducts = useStore(state => state.fetchProducts);
 
   useEffect(() => {

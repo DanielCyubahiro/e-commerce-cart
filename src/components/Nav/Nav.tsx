@@ -7,6 +7,7 @@ import {
 import {useState} from 'react';
 import styled from 'styled-components';
 import {cn} from '@/lib/utils.ts';
+import {useStore} from '@/store/store.ts';
 
 export const StyledNavigationMenuLink = styled(NavigationMenuLink)`
     padding: 1rem 1rem;
@@ -27,6 +28,7 @@ export const StyledNavigationMenuLink = styled(NavigationMenuLink)`
 
 const Nav = () => {
   const [activeNavItem, setActiveNavItem] = useState<string>('home');
+  const setCartView = useStore(state => state.setCartView);
 
   const navItems = [
     {id: 'home', label: 'Home'},
@@ -44,7 +46,7 @@ const Nav = () => {
                   <NavigationMenuItem key={item.id}>
                     <StyledNavigationMenuLink
                         href={'#'}
-                        onClick={() => setActiveNavItem(item.id)}
+                        onClick={() => (setActiveNavItem(item.id), setCartView(false))}
                         className={cn(
                             'transition-colors hover:text-primary',
                             activeNavItem === item.id
